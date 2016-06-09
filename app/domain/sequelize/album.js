@@ -1,38 +1,24 @@
 'use strict';
 
 module.exports = function (sequelize, DataTypes) {
-	return sequelize.define('Image', {
+	return sequelize.define('Album', {
 		id: {
-			field: 'ImageID',
+			field: 'AlbumID',
 			type: DataTypes.BIGINT,
 			allowNull: false,
 			primaryKey: true,
 			autoIncrement: true
 		},
-		index: {
-			field: 'Index',
-			type: DataTypes.INTEGER,
-			allowNull: true
-		},
-		url: {
-			field: 'Url',
+		name: {
+			field: 'Name',
 			type: DataTypes.STRING,
-			allowNull: true
+			unique: true,
+			allowNull: false
 		},
-		title: {
-			field: 'Title',
+		description: {
+			field: 'Description',
 			type: DataTypes.STRING,
-			allowNull: true
-		},
-		text: {
-			field: 'Text',
-			type: DataTypes.STRING,
-			allowNull: true
-		},
-		color: {
-			field: 'BackgroundColor',
-			type: DataTypes.STRING,
-			allowNull: true
+			allowNull: false
 		},
 		active: {
 			field: 'IsActive',
@@ -50,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: true
 		}
 	}, {
-		tableName: 'Image',
+		tableName: 'Album',
 		timestamps: true,
 		createdAt: 'CreatedDate',
 		updatedAt: 'ModifiedDate',
@@ -64,18 +50,11 @@ module.exports = function (sequelize, DataTypes) {
 		},
 		classMethods: {
 			associate: function (models) {
-				models.Image.belongsTo(models.ImageType, {
-					foreignKey: {
-						name: 'ImageTypeID'
-					},
-					as: 'imageType'
-				});
-
-				models.Image.belongsTo(models.Album, {
+				models.Album.hasMany(models.Image, {
+					as: 'images',
 					foreignKey: {
 						name: 'AlbumID'
-					},
-					as: 'album'
+					}
 				});
 			}
 		}

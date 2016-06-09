@@ -9,11 +9,6 @@ module.exports = function (sequelize, DataTypes) {
 			primaryKey: true,
 			autoIncrement: true
 		},
-		externalUid: {
-			field: 'ExternalUID',
-			type: DataTypes.STRING,
-			allowNull: true
-		},
 		name: {
 			field: 'Name',
 			type: DataTypes.STRING,
@@ -49,14 +44,13 @@ module.exports = function (sequelize, DataTypes) {
 		timestamps: true,
 		createdAt: 'CreatedDate',
 		updatedAt: 'ModifiedDate',
-		//defaultScope: {
-		//	attributes: {
-		//		exclude: ['id', 'active', 'createdBy', 'modifiedBy', 'CreatedDate', 'ModifiedDate']
-		//	},
-		//	where: {
-		//		active: true
-		//	}
-		//}
+		defaultScope: {
+			attributes: {
+				exclude: ['id', 'active', 'createdBy', 'modifiedBy', 'CreatedDate', 'ModifiedDate']
+			},
+			where: {
+				active: true
+			}
+		}
 	});
 };
-

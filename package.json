@@ -8,13 +8,12 @@
     "start": "node app/main.js"
   },
   "dependencies": {
-    "bluebird": "^3.3.3",
+    "async": "^2.0.0-rc.6",
     "lodash": "^4.5.1",
     "pg": "^4.5.5",
-    "sequelize": "^3.19.3"
+    "sequelize": "^3.23.3"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=4.0.0"
   }

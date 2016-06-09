@@ -1,9 +1,26 @@
 'use strict';
 
+let async = require('async');
 let domain = require('./domain/sequelize/domain');
-let q = require('./util/q');
-let partnersService = require('./modules/partners/partners.service')(domain, q);
+let service = require('./service')(domain);
 
-partnersService.findCarouselImagesByUrl('url').then(function (result) {
-	console.log('result', result);
-});
+async.series([
+	findAllAlbumsWithImages,
+	findOneAlbumWithImages
+]);
+
+function findAllAlbumsWithImages(done) {
+	console.log('---------- findAllAlbumsWithImages');
+	return service.findAllAlbumsWithImages('summer 2016').then(function (result) {
+		console.log('SQL results:', result);
+		done(null, 'done');
+	});
+}
+
+function findOneAlbumWithImages(done) {
+	console.log('---------- findOneAlbumWithImages');
+	return service.findOneAlbumWithImages('summer 2016').then(function (result) {
+		console.log('SQL results:', result);
+		done(null, 'done');
+	});
+}
